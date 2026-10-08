@@ -1,6 +1,95 @@
-* , *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { margin: 0; min-width: 320px; font-family: Arial, sans-serif; color: #171717; background: #f5f4ef; }
-a { color: inherit; }
-button, input, textarea, select { font: inherit; }
-body{padding:48px}.banner{position:relative;max-width:1100px;margin:0 auto;padding:64px;background:#d8ff55}.banner h1{max-width:700px;font-size:64px}.banner__link{display:inline-block;padding:14px 20px;background:#171717;color:#fff}.banner__link:hover{/* TODO */}.banner__link:focus-visible{/* TODO */}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1100px;margin:40px auto 0}.card{position:relative;min-height:260px;padding:28px;color:#171717;background:#fff;border:1px solid #171717;overflow:hidden}.card::before{/* TODO */}.card:hover{/* TODO */}.card:focus-visible{/* TODO */}
+.card {
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.banner__link:hover {
+  text-decoration: none;
+  background: #6c5ce7;
+  color: #ffffff;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.banner__link:active {
+  transform: translateY(1px);
+  background: #5649c0;
+}
+
+.banner__link:focus-visible,
+.card:focus-visible {
+  outline: 3px solid #171717;
+  outline-offset: 4px;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 6px;
+  background: #d8ff55;
+  transition: height 0.2s ease;
+}
+
+.card::after {
+  content: "→";
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-size: 1.2rem;
+  opacity: 0.5;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.card:hover::after {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+.card:not(.card--featured):hover {
+  opacity: 0.95;
+}
+
+.card:is(.card--featured, .card--important)::before {
+  background: #ff7675;
+  height: 8px;
+}
+
+.card .card__tooltip {
+  content: "Подробнее...";
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: #171717;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 10;
+}
+
+.card .card__tooltip::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 4px 4px 0;
+  border-style: solid;
+  border-color: #171717 transparent transparent;
+}
+
+.card:hover .card__tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
