@@ -1,27 +1,98 @@
-.card {
-  position: relative;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+:root {
+  --primary-color: #6c5ce7;
+  --primary-active: #5649c0;
+  --accent-color: #d8ff55;
+  --important-color: #ff7675;
+  --dark-color: #171717;
+  --bg-color: #f9f9fb;
+  --text-color: #2d3436;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  padding: 40px 20px;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.banner {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 40px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.banner__title {
+  font-size: 2.2rem;
+  margin-bottom: 12px;
+  color: var(--dark-color);
+}
+
+.banner__text {
+  font-size: 1.1rem;
+  margin-bottom: 24px;
+  color: #636e72;
+}
+
+.banner__link {
+  display: inline-block;
+  background: var(--primary-color);
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s ease, transform 0.1s ease;
 }
 
 .banner__link:hover {
-  text-decoration: none;
-  background: #6c5ce7;
-  color: #ffffff;
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  background: var(--primary-active);
 }
 
 .banner__link:active {
-  transform: translateY(1px);
-  background: #5649c0;
+  transform: translateY(2px);
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.card {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: visible;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
 }
 
 .banner__link:focus-visible,
 .card:focus-visible {
-  outline: 3px solid #171717;
+  outline: 3px solid var(--dark-color);
   outline-offset: 4px;
 }
 
@@ -31,43 +102,56 @@
   inset: 0 auto auto 0;
   width: 100%;
   height: 6px;
-  background: #d8ff55;
-  transition: height 0.2s ease;
+  background: var(--accent-color);
+  border-radius: 12px 12px 0 0;
 }
 
 .card::after {
   content: "→";
   position: absolute;
-  bottom: 20px;
-  right: 20px;
-  font-size: 1.2rem;
-  opacity: 0.5;
+  bottom: 24px;
+  right: 24px;
+  font-size: 1.3rem;
+  color: var(--primary-color);
+  opacity: 0;
+  transform: translateX(-10px);
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .card:hover::after {
   opacity: 1;
-  transform: translateX(4px);
+  transform: translateX(0);
 }
 
 .card:not(.card--featured):hover {
-  opacity: 0.95;
+  opacity: 0.9;
 }
 
 .card:is(.card--featured, .card--important)::before {
-  background: #ff7675;
+  background: var(--important-color);
   height: 8px;
 }
 
+.card__title {
+  font-size: 1.4rem;
+  margin-bottom: 12px;
+  color: var(--dark-color);
+  margin-top: 10px;
+}
+
+.card__description {
+  color: #636e72;
+  font-size: 0.95rem;
+}
+
 .card .card__tooltip {
-  content: "Подробнее...";
   position: absolute;
-  top: -40px;
+  top: -45px;
   left: 50%;
   transform: translateX(-50%) translateY(10px);
-  background: #171717;
-  color: #fff;
-  padding: 6px 12px;
+  background: var(--dark-color);
+  color: #ffffff;
+  padding: 6px 14px;
   border-radius: 4px;
   font-size: 0.8rem;
   white-space: nowrap;
@@ -75,6 +159,7 @@
   visibility: hidden;
   transition: opacity 0.2s ease, transform 0.2s ease;
   z-index: 10;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .card .card__tooltip::after {
@@ -85,7 +170,7 @@
   transform: translateX(-50%);
   border-width: 4px 4px 0;
   border-style: solid;
-  border-color: #171717 transparent transparent;
+  border-color: var(--dark-color) transparent transparent;
 }
 
 .card:hover .card__tooltip {
